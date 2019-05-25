@@ -22,46 +22,52 @@
 import Jetson.GPIO as GPIO
 import time
 
-# Pin Definitions
-input_pin1 = 12 #18  # BCM pin 18, BOARD pin 12
-input_pin2 = 13 
+# Pin Definitions:
+led_pin_1 = 12
+led_pin_2 = 13
+#but_pin = 18
+
+# blink LED 2 quickly 5 times when button pressed
+def blink1(channel):
+    print(channel)
+    print(" Blink LED 1 up")
+    print("Value read from pin {} : {}".format(led_pin_1, '1up'))
+
+    
+
+def blink2(channel):
+    pring(channel)
+    print("Blink LED 2 up")
+    print("Value read from pin {} : {}".format(led_pin_2, '2up'))
+    
 
 def main():
-    prev_value1 = None
-    prev_value2 = None
     # Pin Setup:
-    GPIO.setmode(GPIO.BOARD)  # BCM pin-numbering scheme from Raspberry Pi
-    GPIO.setup(input_pin1, GPIO.IN)  # set pin as an input pin
-    GPIO.setup(input_pin2, GPIO.IN)
+    GPIO.setmode(GPIO.BOARD)  # BOARD pin-numbering scheme
+    # GPIO.setup([led_pin_1, led_pin_2], GPIO.IN)  # LED pins set as output
+    GPIO.setup(led_pin_1, GPIO.IN)  # button pin set as input
+    #GPIO.setup(led_pin_2, GPIO.IN)
+
+    # Initial state for LEDs:
+    # GPIO.output(led_pin_1, GPIO.LOW)
+    # GPIO.output(led_pin_2, GPIO.LOW)
+
+    GPIO.add_event_detect(led_pin_1, GPIO.RISING, callback=blink1, bouncetime=10)
+    #GPIO.add_event_detect(led_pin_2, GPIO.RISING, callback=blink2, bouncetime=10)
+
     print("Starting demo now! Press CTRL+C to exit")
     try:
         while True:
-            value1 = GPIO.input(input_pin1)
-            if value1 != prev_value1:
-                if value1 == GPIO.HIGH:
-                    value_str1 = "HIGH"
-                    print("high")
-                else:
-                    value_str1 = "LOW"
-                    print("low")
-                print("Value read from pin {} : {}".format(input_pin1,
-                                                           value_str1))
-                prev_value1 = value1
 
-            value2 = GPIO.input(input_pin2)
-            if value2 != prev_value2:
-                if value2 == GPIO.HIGH:
-                    value_str2 = "HIGH"
-                    print("high")
-                else:
-                    value_str2 = "LOW"
-                    print("low")
-                print("Value read from pin {} : {}".format(input_pin2,
-                                                           value_str2))
-                prev_value2 = value2
+            input1 = GPIO.input(led_pin_1)
+            #input2 = GPIO.input(led_pin_2)
+            # blink LED 1 slowly
+            print("Value read from pin {} : {}\n".format(input1, '1down'))
+            time.sleep(2)
+            #print("Value read from pin {} : {}\n".format(input2, '2down'))
             time.sleep(1)
     finally:
-        GPIO.cleanup()
+        GPIO.cleanup()  # cleanup all GPIOs
 
 if __name__ == '__main__':
     main()

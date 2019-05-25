@@ -1,0 +1,29 @@
+jhj@fuseki:~/python$ python3 button_interrupt.py 
+/usr/local/lib/python3.6/dist-packages/Jetson/GPIO/gpio.py:228: RuntimeWarning: This channel is already in use, continuing anyway. Use GPIO.setwarnings(False) to disable warnings
+  RuntimeWarning)
+Starting demo now! Press CTRL+C to exit
+Value read from pin 0 : 1down
+
+Value read from pin 0 : 2down
+
+Value read from pin 0 : 1down
+
+12
+ Blink LED 1 up
+Value read from pin 12 : 1up
+Value read from pin 0 : 2down
+
+Value read from pin 0 : 1down
+
+Value read from pin 0 : 2down
+
+Value read from pin 0 : 1down
+
+Value read from pin 0 : 2down
+
+Value read from pin 0 : 1down
+
+Value read from pin 1 : 2down
+
+Value read from pin 0 : 1down
+
