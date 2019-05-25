@@ -35,24 +35,24 @@ def blink1(channel):
 
     
 
-def blink2(channel):
-    pring(channel)
-    print("Blink LED 2 up")
-    print("Value read from pin {} : {}".format(led_pin_2, '2up'))
+# def blink2(channel):
+#     pring(channel)
+#     print("Blink LED 2 up")
+#     print("Value read from pin {} : {}".format(led_pin_2, '2up'))
     
 
 def main():
     # Pin Setup:
     GPIO.setmode(GPIO.BOARD)  # BOARD pin-numbering scheme
     # GPIO.setup([led_pin_1, led_pin_2], GPIO.IN)  # LED pins set as output
-    GPIO.setup(led_pin_1, GPIO.IN)  # button pin set as input
+    GPIO.setup(12, GPIO.IN)  # button pin set as input
     #GPIO.setup(led_pin_2, GPIO.IN)
 
     # Initial state for LEDs:
     # GPIO.output(led_pin_1, GPIO.LOW)
     # GPIO.output(led_pin_2, GPIO.LOW)
 
-    GPIO.add_event_detect(led_pin_1, GPIO.RISING, callback=blink1, bouncetime=10)
+    GPIO.add_event_detect(12, GPIO.RISING, callback=blink1, bouncetime=10)
     #GPIO.add_event_detect(led_pin_2, GPIO.RISING, callback=blink2, bouncetime=10)
 
     print("Starting demo now! Press CTRL+C to exit")
@@ -62,10 +62,10 @@ def main():
             input1 = GPIO.input(led_pin_1)
             #input2 = GPIO.input(led_pin_2)
             # blink LED 1 slowly
-            print("Value read from pin {} : {}\n".format(input1, '1down'))
+            print("Value read from pin {} : {}\n".format(input1, ' pin_1 low'))
             time.sleep(2)
             #print("Value read from pin {} : {}\n".format(input2, '2down'))
-            time.sleep(1)
+            # time.sleep(1)
     finally:
         GPIO.cleanup()  # cleanup all GPIOs
 
